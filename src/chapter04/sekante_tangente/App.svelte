@@ -114,10 +114,10 @@
   const yTicks = ticks(yMin, yMax, 1);
 
   // ── Farben ────────────────────────────────────────────────────────────────
-  const COLOR_FUNC  = '#1a5276';  // Dunkelblau  – Funktion f(x)
-  const COLOR_SEK   = '#c0392b';  // Rot         – Sekante
+  const COLOR_FUNC  = '#005A94';  // Dunkelblau  – Funktion f(x)
+  const COLOR_SEK   = '#E60000';  // Rot         – Sekante
   const COLOR_TAN   = '#27ae60';  // Grün        – Tangente
-  const COLOR_POINT = '#8e44ad';  // Violett     – Endpunkte der Sekante
+  const COLOR_POINT = '#e87846';  // Violett     – Endpunkte der Sekante
 
   // ── Farbinterpolation für den Fehler-Indikator ────────────────────────────
   // Wir interpolieren von Rot (großer Fehler) zu Grün (kleiner Fehler),
@@ -148,7 +148,7 @@
 </script>
 
 <!-- ══════════════════════════════════════════════════════════════════════════
-     TEMPLATE  –  HTML-Struktur der Komponente
+     TEMPLATE  -  HTML-Struktur der Komponente
      ══════════════════════════════════════════════════════════════════════════
 
      Svelte-Template-Syntax:
@@ -163,9 +163,9 @@
 
   <!-- ── Kopfzeile ─────────────────────────────────────────────────────────── -->
   <header>
-    <h1>Sekante → Tangente</h1>
+    <h1>Applet Sekante → Tangente</h1>
     <p>
-      Verschiebe den Schieberegler und beobachte, wie sich die Sekante
+      Verschiebe Sie den Schieberegler und beobachten SIE, wie sich die Sekante
       der Tangente annähert, wenn&nbsp;Δx&nbsp;→&nbsp;0.
     </p>
   </header>
@@ -255,28 +255,28 @@
       <polyline points={funcPoints} class="line-func" />
 
       <!-- ── Markierungspunkte der Sekante ──────────────────────────────── -->
-      <!-- Punkt P₁ = (x0, f(x0)) – Ausgangspunkt -->
+      <!-- Punkt P₁ = (x0, f(x0)) - Ausgangspunkt -->
       <circle cx={px0.x} cy={px0.y} r="5" fill={COLOR_POINT} />
       <text x={px0.x - 8} y={px0.y - 10} class="point-label" text-anchor="middle">P₁</text>
 
-      <!-- Punkt P₂ = (x0+Δx, f(x0+Δx)) – wandert mit dem Slider -->
+      <!-- Punkt P₂ = (x0+Δx, f(x0+Δx)) - wandert mit dem Slider -->
       <circle cx={px1.x} cy={px1.y} r="5" fill={COLOR_SEK} />
-      <text x={px1.x + 8} y={px1.y - 10} class="point-label" text-anchor="middle">P₂</text>
+      <text x={px1.x - 8} y={px1.y - 10} class="point-label" text-anchor="middle">P₂</text>
 
       <!-- ── Legende ─────────────────────────────────────────────────────── -->
       <g transform="translate({PAD.left + 8}, {PAD.top + 10})">
         <!-- Funktion -->
         <line x1="0" y1="8"  x2="22" y2="8"  stroke={COLOR_FUNC} stroke-width="2.5" />
-        <text x="27" y="12" class="legend-text">f(x) = x² − 2x + 3</text>
+        <text x="27" y="9" class="legend-text">f(x) = x² − 2x + 3</text>
 
         <!-- Sekante -->
-        <line x1="0" y1="26" x2="22" y2="26" stroke={COLOR_SEK} stroke-width="1.8" />
-        <text x="27" y="30" class="legend-text">
+        <line x1="0" y1="26" x2="22" y2="26" stroke={COLOR_SEK} stroke-width="2.5" />
+        <text x="27" y="27" class="legend-text">
           Sekante (Steigung = {slopeDisplay})
         </text>
 
         <!-- Tangente -->
-        <line x1="0" y1="44" x2="22" y2="44" stroke={COLOR_TAN} stroke-width="1.8"
+        <line x1="0" y1="44" x2="22" y2="44" stroke={COLOR_TAN} stroke-width="2.5"
               stroke-dasharray="5,3" />
         <text x="27" y="48" class="legend-text">
           Tangente f′({x0}) = {slope_tan.toFixed(2)}
@@ -333,13 +333,6 @@
     </div>
 
     <div class="info-tile">
-      <span class="info-label">Tangentensteigung</span>
-      <!-- Analytische Ableitung – fest für x0 = 2 -->
-      <span class="info-value" style="color: {COLOR_TAN}">{slope_tan.toFixed(4)}</span>
-      <span class="info-formula">f′(x₀)</span>
-    </div>
-
-    <div class="info-tile">
       <span class="info-label">Approximationsfehler</span>
       <!--
         Der Fehler zeigt, wie weit der Differenzenquotient von der echten
@@ -352,18 +345,6 @@
     </div>
 
   </div>
-
-  <!-- ── Didaktischer Hinweis ──────────────────────────────────────────────── -->
-  <footer>
-    <p>
-      <strong>Kernidee:</strong> Die Sekante verbindet zwei Punkte des Graphen –
-      ihre Steigung ist der <em>Differenzenquotient</em> Δf/Δx.
-      Wenn Δx → 0, wird die Sekante zur Tangente,
-      und der Differenzenquotient wird zum <em>Differentialquotienten</em> f′(x₀).
-      In der <strong>numerischen Differentiation</strong> nutzen wir einen kleinen,
-      aber endlichen Δx – und akzeptieren dabei einen Approximationsfehler.
-    </p>
-  </footer>
 
 </div>
 
@@ -416,7 +397,7 @@
   header {
     padding: 20px 24px 16px;
     border-bottom: 1px solid var(--border);
-    background: #f7f6f0;
+    background: #f3f4f6;
   }
   header h1 {
     font-size: 1.1rem;
@@ -465,7 +446,7 @@
   .delta-label {
     font-family: var(--font-ui);
     font-size: 11px;
-    fill: #c0392b;
+    fill: #e60000;
     font-weight: 600;
   }
   .point-label {
@@ -579,7 +560,7 @@
   .info-bar {
     display: flex;
     border-top: 1px solid var(--border);
-    background: #f7f6f0;
+    background: #f3f4f6;
   }
   .info-tile {
     flex: 1;
@@ -611,16 +592,4 @@
     font-size: .75rem;
     color: var(--muted);
   }
-
-  /* ── Footer ───────────────────────────────────────────────────────────── */
-  footer {
-    padding: 14px 24px 18px;
-    border-top: 1px solid var(--border);
-  }
-  footer p {
-    font-size: .83rem;
-    line-height: 1.6;
-    color: #3a3a35;
-  }
-  footer strong { color: var(--text); }
 </style>
